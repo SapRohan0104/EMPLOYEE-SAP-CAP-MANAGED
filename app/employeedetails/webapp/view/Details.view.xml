@@ -1,6 +1,12 @@
-  <mvc:View controllerName="com.app.employeedetails.controller.Details"
+  <mvc:View xmlns:form="sap.ui.layout.form" controllerName="com.app.employeedetails.controller.Details"
     xmlns:html="http://www.w3.org/1999/xhtml"
     xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
     xmlns="sap.m">
-    <Title text="Details Page"></Title>
+    <form:SimpleForm id="idEmployeeDetailsForm">
+        <Label text="Employee Name"></Label>
+        <Text text="{fName} {lName}"></Text>
+
+        <Label text="CTC"/>
+        <Text text="{salary/costToCompany}"/>
+    </form:SimpleForm>
 </mvc:View>
