@@ -11,7 +11,7 @@ sap.ui.define([
 
         return Controller.extend("com.app.employeedetails.controller.Home", {
             onInit: function () {
-
+                // this.oRouter = this.getOwnerComponent().getRouter();
             },
             onGoPress: function () {
                 /**
@@ -27,6 +27,14 @@ sap.ui.define([
 
                 sFirstName ? aFilters.push(new Filter("fName", FilterOperator.EQ, sFirstName)) : "";
                 oTable.getBinding("items").filter(aFilters);
+            },
+            onSelectEmployee: function (oEvent) {
+                const { ID, fName } = oEvent.getSource().getSelectedItem().getBindingContext().getObject();
+                const oRouter = this.getOwnerComponent().getRouter();
+                oRouter.navTo("RouteDetails", {
+                    empId: ID,
+                    empName: fName
+                })
             }
         });
     });

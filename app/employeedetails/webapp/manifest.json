@@ -135,6 +135,13 @@
           "target": [
             "TargetHome"
           ]
+        },
+        {
+          "name": "RouteDetails",
+          "pattern": "EmployeeDetails/{empId}/:empName:",
+          "target": [
+            "TargetDetails"
+          ]
         }
       ],
       "targets": {
@@ -144,6 +151,12 @@
           "clearControlAggregation": false,
           "viewId": "Home",
           "viewName": "Home"
+        },
+        "TargetDetails": {
+          "viewType": "XML",
+          "transition": "slide",
+          "viewId": "Details",
+          "viewName": "Details"
         }
       }
     },
