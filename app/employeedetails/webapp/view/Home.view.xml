@@ -131,6 +131,7 @@
                 mode="SingleSelectMaster"
                 alternateRowColors="true"
                 items="{/Employee}"
+                selectionChange="onSelectEmployee"
             >
                 <headerToolbar>
                     <OverflowToolbar id="idEmployeeTableHeader">
@@ -186,7 +187,7 @@
                     </Column>
                 </columns>
                 <items>
-                    <ColumnListItem id="idEmployeeTableColListItem">
+                    <ColumnListItem id="idEmployeeTableColListItem" type="Navigation">
                         <cells>
                             <Text
                                 id="idNameColValue"
