@@ -1,12 +1,13 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
     "sap/ui/model/Filter",
-    "sap/ui/model/FilterOperator"
+    "sap/ui/model/FilterOperator",
+    "sap/ui/core/Fragment"
 ],
     /**
      * @param {typeof sap.ui.core.mvc.Controller} Controller
      */
-    function (Controller, Filter, FilterOperator) {
+    function (Controller, Filter, FilterOperator, Fragment) {
         "use strict";
 
         return Controller.extend("com.app.employeedetails.controller.Home", {
@@ -35,6 +36,24 @@ sap.ui.define([
                     empId: ID,
                     empName: fName
                 })
+            },
+            onCreateBtnPress: async function () {
+                if (!this.oCreateEmployeeDialog) {
+                    this.oCreateEmployeeDialog = await Fragment.load({
+                        id: this.getView().getId(),
+                        name: "com.app.employeedetails.fragments.CreateEmployeeDialog",
+                        controller: this
+                    });
+                    this.getView().addDependent(this.oCreateEmployeeDialog);
+                }
+
+                this.oCreateEmployeeDialog.open();
+            },
+
+            onCloseDialog: function(){
+                if(this.oCreateEmployeeDialog.isOpen()){
+                    this.oCreateEmployeeDialog.close()
+                }
             }
         });
     });
