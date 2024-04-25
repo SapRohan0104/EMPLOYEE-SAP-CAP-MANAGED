@@ -145,6 +145,7 @@
                             icon="sap-icon://add"
                             tooltip="Create Employee"
                             type="Success"
+                            press="onCreateBtnPress"
                         />
                         <Button
                             id="idBtnDelete"

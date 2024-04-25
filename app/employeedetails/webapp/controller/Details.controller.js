@@ -13,9 +13,9 @@ sap.ui.define(
         onEmployeeDetailsLoad: function(oEvent ){
             const {empId} = oEvent.getParameter("arguments");
             const sRouterName = oEvent.getParameter("name");
-            const oForm = this.getView().byId("idEmployeeDetailsForm");
+            const oObjectPage = this.getView().byId("idEmployeeDetailsObjectPage");
 
-            oForm.bindElement(`/Employee(${empId})`, {
+            oObjectPage.bindElement(`/Employee(${empId})`, {
                 expand: 'salary,address'
             });
             debugger;
