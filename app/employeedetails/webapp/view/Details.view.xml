@@ -1,12 +1,148 @@
-  <mvc:View xmlns:form="sap.ui.layout.form" controllerName="com.app.employeedetails.controller.Details"
+<mvc:View
+    xmlns:form="sap.ui.layout.form"
+    xmlns:uxap="sap.uxap"
+    controllerName="com.app.employeedetails.controller.Details"
     xmlns:html="http://www.w3.org/1999/xhtml"
-    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
-    xmlns="sap.m">
-    <form:SimpleForm id="idEmployeeDetailsForm">
-        <Label text="Employee Name"></Label>
-        <Text text="{fName} {lName}"></Text>
-
-        <Label text="CTC"/>
-        <Text text="{salary/costToCompany}"/>
-    </form:SimpleForm>
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns="sap.m"
+>
+    <uxap:ObjectPageLayout
+        id="idEmployeeDetailsObjectPage"
+        upperCaseAnchorBar="true"
+    >
+        <uxap:headerTitle>
+            <uxap:ObjectPageDynamicHeaderTitle id="idObjectPageDynamicTitle">
+                <uxap:expandedHeading>
+                    <Title
+                        id="idEmployeeDetailsTitle"
+                        text="{fName} {lName}"
+                    />
+                </uxap:expandedHeading>
+            </uxap:ObjectPageDynamicHeaderTitle>
+        </uxap:headerTitle>
+        <uxap:sections>
+            <uxap:ObjectPageSection
+                titleUppercase="true"
+                id="generalInfo"
+                title="General Information"
+            >
+                <uxap:subSections>
+                    <uxap:ObjectPageSubSection id="idGeneralInfoSubSection">
+                        <uxap:blocks>
+                            <form:SimpleForm
+                                id="idEmployeeDetailsForm"
+                                editable="false"
+                                layout="ColumnLayout"
+                                columnsM="2"
+                                columnsL="3"
+                                columnsXL="4"
+                            >
+                                <Label
+                                    id="idNameLabel"
+                                    text="Name"
+                                />
+                                <Text
+                                    id="idNameText"
+                                    text="{fName} {lName}"
+                                />
+                                <Label
+                                    id="idEmailLabel"
+                                    text="Email"
+                                />
+                                <Text
+                                    id="idEmailText"
+                                    text="{email}"
+                                />
+                                <Label
+                                    id="idPhoneLabel"
+                                    text="Phone"
+                                />
+                                <Text
+                                    id="idPhoneText"
+                                    text="{phone}"
+                                />
+                            </form:SimpleForm>
+                        </uxap:blocks>
+                    </uxap:ObjectPageSubSection>
+                </uxap:subSections>
+            </uxap:ObjectPageSection>
+            <uxap:ObjectPageSection
+                id="idAddressSection"
+                title="Address Details"
+                titleUppercase="true"
+            >
+                <uxap:subSections>
+                    <uxap:ObjectPageSubSection id="idAddressSubSection">
+                        <uxap:blocks>
+                            <Table
+                                id="idEmployeeAddressTable"
+                                alternateRowColors="true"
+                                items="{address}"
+                            >
+                                <columns>
+                                    <Column id="idCityColumn">
+                                        <Title
+                                            id="idCityColumnHeader"
+                                            text="City"
+                                        />
+                                    </Column>
+                                    <Column id="idAddressColumn">
+                                        <Title
+                                            id="idAddressColumnHeader"
+                                            text="Address"
+                                        />
+                                    </Column>
+                                    <Column id="idPincodeColumn">
+                                        <Title
+                                            id="idPincodeColumnHeader"
+                                            text="Pincode"
+                                        />
+                                    </Column>
+                                    <Column id="idStreetColumn">
+                                        <Title
+                                            id="idStreetColumnHeader"
+                                            text="Street"
+                                        />
+                                    </Column>
+                                    <Column id="idLandmarkColumn">
+                                        <Title
+                                            id="idLandmarkColumnHeader"
+                                            text="Landmark"
+                                        />
+                                    </Column>
+                                </columns>
+                                <items>
+                                    <ColumnListItem
+                                        id="idEmployeeAddressColumnList"
+                                    >
+                                        <Text
+                                            id="idCityColumnValue"
+                                            text="{city}"
+                                        />
+                                        <Text
+                                            id="idAddressColumnValue"
+                                            text="{address}"
+                                        />
+                                        <Text
+                                            id="idPinCodeColumnValue"
+                                            text="{pincode}"
+                                        />
+                                        <Text
+                                            id="idStreetColumnValue"
+                                            text="{street}"
+                                        />
+                                        <Text
+                                            id="idLandmarkColumnValue"
+                                            text="{landmark}"
+                                        />
+                                    </ColumnListItem>
+                                </items>
+                            </Table>
+                        </uxap:blocks>
+                    </uxap:ObjectPageSubSection>
+                </uxap:subSections>
+            </uxap:ObjectPageSection>
+        </uxap:sections>
+    </uxap:ObjectPageLayout>
 </mvc:View>
