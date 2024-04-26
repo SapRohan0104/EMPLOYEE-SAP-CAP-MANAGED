@@ -1,18 +1,32 @@
 sap.ui.define([
-    "sap/ui/core/mvc/Controller",
+    "./BaseController",
     "sap/ui/model/Filter",
     "sap/ui/model/FilterOperator",
-    "sap/ui/core/Fragment"
+    "sap/ui/model/json/JSONModel",
+    "sap/m/MessageBox"
 ],
     /**
      * @param {typeof sap.ui.core.mvc.Controller} Controller
      */
-    function (Controller, Filter, FilterOperator, Fragment) {
+    function (Controller, Filter, FilterOperator, JSONModel, MessageBox) {
         "use strict";
 
         return Controller.extend("com.app.employeedetails.controller.Home", {
             onInit: function () {
-                // this.oRouter = this.getOwnerComponent().getRouter();
+                const oLocalModel = new JSONModel({
+                    fName: "",
+                    lName: "",
+                    gender: "",
+                    DOB: "",
+                    contractStarted: "",
+                    email: "",
+                    phone: ""
+                });
+                this.getView().setModel(oLocalModel, "localModel");
+                this.getRouter().attachRoutePatternMatched(this.onEmployeeListLoad, this);
+            },
+            onEmployeeListLoad: function () {
+                this.getView().byId("idEmployeeTable").getBinding("items").refresh();
             },
             onGoPress: function () {
                 /**
@@ -31,7 +45,7 @@ sap.ui.define([
             },
             onSelectEmployee: function (oEvent) {
                 const { ID, fName } = oEvent.getSource().getSelectedItem().getBindingContext().getObject();
-                const oRouter = this.getOwnerComponent().getRouter();
+                const oRouter = this.getRouter();
                 oRouter.navTo("RouteDetails", {
                     empId: ID,
                     empName: fName
@@ -39,21 +53,29 @@ sap.ui.define([
             },
             onCreateBtnPress: async function () {
                 if (!this.oCreateEmployeeDialog) {
-                    this.oCreateEmployeeDialog = await Fragment.load({
-                        id: this.getView().getId(),
-                        name: "com.app.employeedetails.fragments.CreateEmployeeDialog",
-                        controller: this
-                    });
-                    this.getView().addDependent(this.oCreateEmployeeDialog);
+                    this.oCreateEmployeeDialog = await this.loadFragment("CreateEmployeeDialog")
                 }
-
                 this.oCreateEmployeeDialog.open();
             },
 
-            onCloseDialog: function(){
-                if(this.oCreateEmployeeDialog.isOpen()){
+            onCloseDialog: function () {
+                if (this.oCreateEmployeeDialog.isOpen()) {
                     this.oCreateEmployeeDialog.close()
                 }
+            },
+
+            onCreateEmployee: async function () {
+                const oPayload = this.getView().getModel("localModel").getProperty("/"),
+                    oModel = this.getView().getModel("ModelV2");
+                try {
+                    await this.createData(oModel, oPayload, "/Employee");
+                    this.getView().byId("idEmployeeTable").getBinding("items").refresh();
+                    this.oCreateEmployeeDialog.close();
+                } catch (error) {
+                    this.oCreateEmployeeDialog.close();
+                    MessageBox.error("Some technical Issue");
+                }
+
             }
         });
     });
