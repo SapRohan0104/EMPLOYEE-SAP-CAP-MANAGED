@@ -1,8 +1,9 @@
 sap.ui.define(
     [
-        "sap/ui/core/mvc/Controller"
+        "./BaseController",
+        "sap/m/MessageBox"
     ],
-    function(BaseController) {
+    function(BaseController, MessageBox) {
       "use strict";
   
       return BaseController.extend("com.app.employeedetails.controller.Details", {
@@ -12,14 +13,24 @@ sap.ui.define(
         },
         onEmployeeDetailsLoad: function(oEvent ){
             const {empId} = oEvent.getParameter("arguments");
+            this.ID = empId;
             const sRouterName = oEvent.getParameter("name");
             const oObjectPage = this.getView().byId("idEmployeeDetailsObjectPage");
 
             oObjectPage.bindElement(`/Employee(${empId})`, {
                 expand: 'salary,address'
             });
-            debugger;
-        }
+        },
+        onDeleteEmployee: async function(){
+          const oModel = this.getView().getModel("ModelV2");
+         
+          try {
+            await this.deleteData(oModel, "/Employee", this.ID);
+            this.getRouter().navTo("RouteHome");
+          } catch (error) {
+            MessageBox.error("Some Technical Issue");
+          }
+      }
       });
     }
   );

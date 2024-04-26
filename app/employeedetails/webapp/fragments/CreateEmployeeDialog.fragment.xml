@@ -51,7 +51,7 @@
                 />
                 <Input
                     id="idFirstNameInput"
-                    value=""
+                    value="{localModel>/fName}"
                 />
                 <Label
                     id="idLastNameLabel"
@@ -59,7 +59,7 @@
                 />
                 <Input
                     id="idLastNameInput"
-                    value=""
+                    value="{localModel>/lName}"
                 />
                 <Label
                     id="idGenderLabel"
@@ -67,7 +67,7 @@
                 />
                 <Input
                     id="idGenderInput"
-                    value=""
+                    value="{localModel>/gender}"
                 />
                 <Label
                     id="idDOBLabel"
@@ -75,7 +75,7 @@
                 />
                 <Input
                     id="idDOBInput"
-                    value=""
+                    value="{localModel>/DOB}"
                 />
                 <Label
                     id="idContractStartedLabel"
@@ -83,7 +83,7 @@
                 />
                 <Input
                     id="idContractStartedInput"
-                    value=""
+                    value="{localModel>/contractStarted}"
                 />
                 <Label
                     id="idEmailLabel"
@@ -91,7 +91,7 @@
                 />
                 <Input
                     id="idEmailInput"
-                    value=""
+                    value="{localModel>/email}"
                 />
                 <Label
                     id="idPhoneNumberLabel"
@@ -99,7 +99,7 @@
                 />
                 <Input
                     id="idPhoneNumberInput"
-                    value=""
+                    value="{localModel>/phone}"
                 />
             </form:SimpleForm>
         </content>

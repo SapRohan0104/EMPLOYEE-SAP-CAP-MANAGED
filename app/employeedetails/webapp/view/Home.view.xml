@@ -147,12 +147,6 @@
                             type="Success"
                             press="onCreateBtnPress"
                         />
-                        <Button
-                            id="idBtnDelete"
-                            icon="sap-icon://delete"
-                            tooltip="Delete Employee"
-                            type="Negative"
-                        />
                     </OverflowToolbar>
                 </headerToolbar>
                 <columns>
